@@ -1,6 +1,6 @@
-# Server ライブラリ
+# Scoreboarder ライブラリ
 
-システム管理のための 簡易的な ScriptAPI ライブラリです
+スコアボード管理のための 簡易的な ScriptAPI ライブラリです
 
 [ダウンロード](https://github.com/haya-to8810/Server/releases/download/minecraft/server.js)
 
@@ -13,33 +13,17 @@
 2. ベータAPI の有効化
 3. 使いたいアドオンで、ファイルを インポートする
 
-##Modules
-<details><summary><bold>モジュール一覧を表示</bold></summary>
+## Example Code
 
-- tick
-  ファイルが読み込まれてからの経過Tick数
-  
-- TPS
-  サーバーのTick Per Second
-  
-- runInterval
-  処理を指定時間ごとに繰り返します
-  
-- runTimeout
-  経過時間後に処理を実行します
-  
-- runJob
-  ジェネレーターを指定時間ごとに進めます
+[Documentation](docs/scoreboarder.md)
 
-- runIntervalJob
-  ジェネレーターを指定時間ごとに進め、
-  処理が終わると最初から再実行されます
+```javascript
+import { world } from "@minecraft/server";
+import ScoreBoarder from "./scoreBoarder.js";
 
-- clearRun
-  登録されている処理を削除します
-  
-- stop
-  特定のグループIDの処理 または 全体の処理 を一時停止します
+const money = new ScoreBoarder("Money");
 
-- start
-  特定のグループIDの処理 または 全体の処理 を再開します
+for(const player of world.getPlayers()){
+    player.onScreenDisplay.setActionBar(`purse: ${money.get(player)}`)
+}
+```
