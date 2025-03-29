@@ -54,6 +54,7 @@ const ServerState = {
  * @param {number} [maxRuns]
  * @param {number} [priority]
  * @param {string} [groupID]
+ * @returns {number}
  */
 /**
  * @overload
@@ -63,6 +64,7 @@ const ServerState = {
  * @param {number} [maxRuns]
  * @param {number} [priority]
  * @param {string} [groupID]
+ * @returns {number}
  */
 /**
  * @returns {number}
@@ -123,15 +125,16 @@ globalThis.Server = {
      */
     runJob: (generator, interval = 1, options = {}) => addTask("job",generator,interval,1,options.priority,options.groupID),
 
+    /** @param {number} ID */
     clearRun: (ID) => {
         const index = ServerState.scheduledTasks.findIndex(task => task.id === ID);
         return index !== -1 && !!ServerState.scheduledTasks.splice(index, 1);
     },
 
-    /** @param {string} groupID */
-    stop: (groupID) => groupID ? ServerState.stoppedTasks[groupID] = true : ServerState.running = false,
-    /** @param {string} groupID */
-    start: (groupID) => groupID ? delete ServerState.stoppedTasks[groupID] : ServerState.running = true,
+    /** @param {string | "*"} groupID */
+    stop: (groupID) => groupID !== "*" ? ServerState.stoppedTasks[groupID] = true : ServerState.running = false,
+    /** @param {string | "*"} groupID */
+    start: (groupID) => groupID !== "*" ? delete ServerState.stoppedTasks[groupID] : ServerState.running = true,
 };
 
 void function update() {
