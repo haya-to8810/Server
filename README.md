@@ -1,6 +1,6 @@
-# Scoreboarder ライブラリ
+# Server ライブラリ
 
-スコアボード管理のための 簡易的な ScriptAPI ライブラリです
+タスク管理のための 簡易的な ScriptAPI ライブラリです
 
 [ダウンロード](https://github.com/haya-to8810/Server/releases/download/minecraft/server.js)
 
@@ -15,7 +15,7 @@
 
 ## Example Code
 
-[Documentation](docs/scoreboarder.md)
+[Documentation](docs/server.md)
 
 ```javascript
 import { world } from "@minecraft/server";
