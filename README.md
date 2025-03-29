@@ -2,7 +2,7 @@
 
 システム管理のための 簡易的な ScriptAPI ライブラリです
 
-[ダウンロード]([https://github.com/](https://github.com/haya-to8810/Server/releases/download/minecraft/server.js))
+[ダウンロード](https://github.com/haya-to8810/Server/releases/download/minecraft/server.js)
 
 > [!NOTE]
 > 質問やエラーは以下のDiscordアカウントへ
