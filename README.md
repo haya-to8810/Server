@@ -19,11 +19,17 @@
 
 ```javascript
 import { world } from "@minecraft/server";
-import ScoreBoarder from "./scoreBoarder.js";
+import "./utils/server.js";
 
-const money = new ScoreBoarder("Money");
-
-for(const player of world.getPlayers()){
-    player.onScreenDisplay.setActionBar(`purse: ${money.get(player)}`)
-}
+Server.runIntervalJob(function* () {
+    
+    for(let i = 0; i < 10; i++) {
+        world.sendMessage(`${i} now.`)
+        if(i % 3 === 0 ) yield;
+    }
+},10,{ 
+    groupID: "count",
+    maxRuns: 20,
+    priority: 0
+})
 ```
