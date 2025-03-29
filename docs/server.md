@@ -7,6 +7,13 @@ Minecraft Bedrock の ScriptAPI で タスク の管理をより、
 
 jsDoc が書かれているので ts-checkを使うことを推奨します。
 
+## Object Property
+
+### `TPS: number`
+ワールドの Tick Per Second
+### `tick: number`
+ファイルが読み込まれてからの経過 tick数
+
 ## Object Methods
 
 ## タスク 操作
@@ -15,12 +22,13 @@ jsDoc が書かれているので ts-checkを使うことを推奨します。
 > *{ groupID?: string, maxRuns?: number, priority?: number }*
 
 > **TaskCallback** -
-> *{ event: { currentTick: number } }*
+> *{ event: { currentTick: number, remainRuns?: number } }*
 
 ### `runInterval(callback,interval?,options?): number`
 - **callback** `TaskCallback`
 - **[interval]** `number`
 - **[options]** `TaskOptions`
+
 指定時間ごとに処理を繰り返し実行します
 
 ### `runTimeout(callback,delay?, options?): number`
