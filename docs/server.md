@@ -41,7 +41,7 @@ jsDoc が書かれているので ts-checkを使うことを推奨します。
 ## ジョブ 操作
 
 > **TaskGenerator** -
-> *() => Generator<*>*
+> *() => Generator<\*>*
 
 ### `runJob(generator,interval?,options?): number`
 - **generator** `TaskGenerator`
