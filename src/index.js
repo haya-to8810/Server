@@ -3,7 +3,7 @@ import { system } from "@minecraft/server";
 
 /**
  * @callback TaskCallback
- * @param { { currentTick: number } } event
+ * @param { { currentTick: number, remainRuns?: number } } event
  */
 
 /** @typedef {() => Generator<*>} TaskGenerator */
@@ -120,7 +120,7 @@ globalThis.Server = {
     /**
      * @function
      * @param {TaskGenerator} generator 
-     * @param {number} interval 
+     * @param {number} [interval] 
      * @param {Omit<TaskOptions,"maxRuns">} [options]
      */
     runJob: (generator, interval = 1, options = {}) => addTask("job",generator,interval,1,options.priority,options.groupID),
@@ -154,9 +154,14 @@ void function update() {
             if (ServerState.stoppedTasks[task.groupID]) { i++; continue; }
             
             try {
-                if (currentTick % task.interval === 0) {
+                if (currentTick % (task.interval || 1) === 0) {
                     if (task.type === "task") {
-                        task.callback({ currentTick });
+                        task.callback(
+                            { 
+                                currentTick,
+                                remainRuns: (task.maxRuns === Infinity ? undefined : task.maxRuns)
+                            }
+                        );
                         if (--task.maxRuns <= 0) {
                             tasks.splice(i, 1);
                             continue;
